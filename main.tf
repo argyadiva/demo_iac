@@ -23,3 +23,13 @@ resource "aws_s3_bucket" "data_lake" {
     ManagedBy   = "terraform"
   }
 }
+
+# Ditambahkan pada branch feature/add-bucket-versioning (langkah 5): melindungi
+# data yang ter-ingest dari penimpaan atau penghapusan yang tidak disengaja.
+resource "aws_s3_bucket_versioning" "data_lake" {
+  bucket = aws_s3_bucket.data_lake.id
+
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
